@@ -16,7 +16,12 @@ class Category extends CI_Controller {
 		$this->pageInfo = $info;
 		$this->post = $this->input->post();
 
-		$this->load->model("{$this->pageInfo['table_base']}_m");
+        $this->load->model("{$this->pageInfo['table_base']}_m");
+        
+        $this->typeArr = [
+            "in" => "Pemasukan",
+            "out" => "Pengeluaran",
+        ];
 	}
 
 	public function index()
@@ -31,6 +36,17 @@ class Category extends CI_Controller {
 		$this->pageInfo['nav_ids'][] = "{$this->pageInfo['table_base']}_create";
 		$this->pageInfo['page_title'][] = "Create";
 		$this->load->view("{$this->pageInfo['table_base']}/create");
+    }
+    
+	public function update($id)
+	{
+		$this->pageInfo['nav_ids'][] = "{$this->pageInfo['table_base']}_list";
+        $this->pageInfo['page_title'][] = "Update";
+        $data = [
+            'detail' => $this->category_m->get_detail($id),
+            'id' => $id,
+        ];
+		$this->load->view("{$this->pageInfo['table_base']}/update", $data);
 	}
 
 	public function get_datatable(){
@@ -57,6 +73,11 @@ class Category extends CI_Controller {
     public function process_insert(){
         parse_str($this->post['data-form'], $data);
         $process = $this->category_m->insert($data);
+        echo json_encode($process);
+    }
+    public function process_update($id){
+        parse_str($this->post['data-form'], $data);
+        $process = $this->category_m->update($data,$id);
         echo json_encode($process);
     }
 

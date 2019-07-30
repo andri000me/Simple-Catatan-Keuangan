@@ -8,6 +8,16 @@ class Category_m extends CI_Model {
                 $this->post = $this->input->post();
         }
         
+        public function get_detail($id){
+            $this->db->where($this->table.'_id', $id);
+            $this->db->from($this->table);
+            $query = $this->db->get();
+
+            $data = $query->row_array();
+
+            return $data;
+    }
+
         public function get_data()
         {
                 $server_side = $this->post['server_side'];

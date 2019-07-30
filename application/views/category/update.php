@@ -6,13 +6,13 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Nama Kategori</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" value="<?=$detail['name']?>" name="name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Deskripsi</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="description">
+                    <input type="text" class="form-control" value="<?=$detail['description']?>" name="description">
                     </div>
                 </div>
                 <div class="form-group">
@@ -20,7 +20,7 @@
                     <div class="col-sm-10">
                     <select class="form-control" name="type">
                         <?php foreach ($this->typeArr as $key => $value) :?>
-                            <option value='<?=$key?>'><?=$value?></option>
+                            <option value='<?=$key?>' <?=($detail['type']==$key?'selected':'')?>><?=$value?></option>
                         <?php endforeach?>
                     </select>
                     </div>
@@ -38,7 +38,7 @@
     });
     function save(){
         $.ajax({
-            url : '<?=site_url($this->pageInfo['table_base'] . '/process_insert/');?>',
+            url : '<?=site_url($this->pageInfo['table_base'] . '/process_update/'. $id);?>',
             type: "POST",
             data: {
                 'data-form' :$("#data-form").serialize(),
