@@ -55,8 +55,8 @@ class Category extends CI_Controller {
         $table= [];
 		foreach ($result['data'] as $key) {
 			$table[$i] = $key;
-			$table[$i]['action'] = "<a href='".site_url($this->pageInfo['table_base'].'/update/'.$key['category_id'])."' type='button' class='btn btn-update btn-primary'>Update</a>";
-			$table[$i]['action'] .= " <button type='button' class='btn update-status btn-danger' data-id='{$key['category_id']}' data-status='inactive'>Delete</button>";
+			$table[$i]['action'] = "<a href='".site_url($this->pageInfo['table_base'].'/update/'.$key[$this->pageInfo['table_base'].'_id'])."' type='button' class='btn btn-update btn-primary'>Update</a>";
+			$table[$i]['action'] .= " <button type='button' class='btn update-status btn-danger' data-id='{$key[$this->pageInfo['table_base'].'_id']}' data-status='inactive'>Delete</button>";
 
 			$i++;
 		}
