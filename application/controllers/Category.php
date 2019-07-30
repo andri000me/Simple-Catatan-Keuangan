@@ -35,11 +35,12 @@ class Category extends CI_Controller {
 
 	public function get_datatable(){
 		$result = $this->category_m->get_data();
-		$i = 0;
+        $i = 0;
+        $table= [];
 		foreach ($result['data'] as $key) {
 			$table[$i] = $key;
 			$table[$i]['action'] = "<a href='".site_url($this->pageInfo['table_base'].'/update/'.$key['category_id'])."' type='button' class='btn btn-update btn-primary'>Update</a>";
-			$table[$i]['action'] .= " <button type='button' class='btn btn-delete btn-danger' data-id='{$key['category_id']}'>Delete</button>";
+			$table[$i]['action'] .= " <button type='button' class='btn update-status btn-danger' data-id='{$key['category_id']}' data-status='inactive'>Delete</button>";
 
 			$i++;
 		}
@@ -51,6 +52,14 @@ class Category extends CI_Controller {
 		];
 
 		echo json_encode($datatable);
-	}
+    }
+    
+    public function update_status(){
+        $data = [
+            'status' => $this->post['status'],
+        ];
+        $update = $this->category_m->update($data,$this->post['id']);
+        echo json_encode($update);
+    }
 
 }

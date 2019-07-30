@@ -14,8 +14,6 @@ MySQL - 5.7.26-0ubuntu0.18.04.1 : Database - keuangan_test
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`keuangan_test` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `keuangan_test`;
-
 /*Table structure for table `category` */
 
 DROP TABLE IF EXISTS `category`;
@@ -29,11 +27,6 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `category` */
-
-insert  into `category`(`category_id`,`name`,`description`,`type`) values 
-(1,'test1','test','in'),
-(2,'test2',NULL,'out'),
-(3,'test3',NULL,'in');
 
 /*Table structure for table `transaction` */
 

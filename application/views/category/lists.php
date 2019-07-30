@@ -1,4 +1,4 @@
-<?php $this->load->view("template/header") ?>
+<?php $this->load->view("template/header");?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-sm-offset-2">
@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<?php $this->load->view("template/footer") ?>
+<?php $this->load->view("template/footer");?>
 <script>
     $(document).ready(function() {
         init_datatable();
@@ -28,8 +28,9 @@
             serverSide: serverSide,
             destroy: true,
             searching: false,
+            ordering: false,
             ajax: {
-                url: '<?= site_url($this->pageInfo['table_base'] . '/get_datatable/') ?>',
+                url: '<?=site_url($this->pageInfo['table_base'] . '/get_datatable/');?>',
                 data: {
                     'server_side': serverSide,
                     'filter': $("#filter-form").serialize(),
@@ -56,4 +57,32 @@
             ]
         });
     }
+
+$('#datatable').on( "click", ".update-status", function(){
+    $id = $(this).data('id');
+    $status = $(this).data('status');
+    //alert($status);
+    $.ajax({
+            url : '<?=site_url($this->pageInfo['table_base'] . '/update_status/');?>',
+            type: "POST",
+            data: {
+                    id: $id,
+                    status: $status,
+                },
+            // data: formd,
+            // contentType: false,
+            // processData: false,
+            dataType: "JSON",
+            success: function(data)
+            {
+                init_datatable();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                Metronic.stopPageLoading();
+                alert('Error : ' + errorThrown);
+            }
+    });
+});
+
 </script>

@@ -16,6 +16,7 @@ class Category_m extends CI_Model {
                         $this->db->where('type', $filter['type']);
                 }
 
+                $this->db->where('status', 'active');
                 $this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
                 $this->db->from($this->table);
 
@@ -42,7 +43,7 @@ class Category_m extends CI_Model {
 
         public function update($data, $id)
         {
-                $this->db->update($this->table, $this, array('id' => $id));
+                $this->db->update($this->table, $data, array($this->table.'_id' => $id));
         }
 
 }

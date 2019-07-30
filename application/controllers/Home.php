@@ -28,7 +28,7 @@ class Home extends CI_Controller {
 
 		$this->pageInfo = $info;
 
-		$this->load->model('transaction');
+		$this->load->model('transaction_m');
 	}
 
 	public function index()
