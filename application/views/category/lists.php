@@ -58,31 +58,27 @@
         });
     }
 
-$('#datatable').on( "click", ".update-status", function(){
-    $id = $(this).data('id');
-    $status = $(this).data('status');
-    //alert($status);
-    $.ajax({
-            url : '<?=site_url($this->pageInfo['table_base'] . '/update_status/');?>',
-            type: "POST",
-            data: {
-                    id: $id,
-                    status: $status,
+    $('#datatable').on( "click", ".update-status", function(){
+        $id = $(this).data('id');
+        $status = $(this).data('status');
+        //alert($status);
+        $.ajax({
+                url : '<?=site_url($this->pageInfo['table_base'] . '/update_status/');?>',
+                type: "POST",
+                data: {
+                        id: $id,
+                        status: $status,
+                    },
+                dataType: "JSON",
+                success: function(data)
+                {
+                    init_datatable();
                 },
-            // data: formd,
-            // contentType: false,
-            // processData: false,
-            dataType: "JSON",
-            success: function(data)
-            {
-                init_datatable();
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                Metronic.stopPageLoading();
-                alert('Error : ' + errorThrown);
-            }
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Error : ' + errorThrown);
+                }
+        });
     });
-});
 
 </script>

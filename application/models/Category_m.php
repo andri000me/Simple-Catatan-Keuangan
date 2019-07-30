@@ -16,7 +16,7 @@ class Category_m extends CI_Model {
                         $this->db->where('type', $filter['type']);
                 }
 
-                $this->db->where('status', 'active');
+                $this->db->where('status', 'active'); //onli active item
                 $this->db->select("SQL_CALC_FOUND_ROWS *", FALSE);
                 $this->db->from($this->table);
 
@@ -28,7 +28,7 @@ class Category_m extends CI_Model {
                 $data = $query->result_array();
                 
                 $query = $this->db->query('SELECT FOUND_ROWS() AS `Count`');
-                $total_res = $query->row()->Count;
+                $total_res = $query->row()->Count; //count total data
 
                 return [
                         "data" => $data,

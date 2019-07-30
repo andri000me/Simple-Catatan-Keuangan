@@ -54,12 +54,18 @@ class Category extends CI_Controller {
 		echo json_encode($datatable);
     }
     
+    public function process_insert(){
+        parse_str($this->post['data-form'], $data);
+        $process = $this->category_m->insert($data);
+        echo json_encode($process);
+    }
+
     public function update_status(){
         $data = [
             'status' => $this->post['status'],
         ];
-        $update = $this->category_m->update($data,$this->post['id']);
-        echo json_encode($update);
+        $process = $this->category_m->update($data,$this->post['id']);
+        echo json_encode($process);
     }
 
 }
