@@ -12,6 +12,7 @@ class Transaction_m extends CI_Model
     public function get_total_by_type($type)
     {
         $this->db->select_sum('nominal');
+        $this->db->where('a.status', 'active'); //onli active item
         $this->db->where('b.type', $type);
         $this->db->join('category b', 'a.category_id = b.category_id', 'left'); 
         $this->db->from($this->table.' a');
